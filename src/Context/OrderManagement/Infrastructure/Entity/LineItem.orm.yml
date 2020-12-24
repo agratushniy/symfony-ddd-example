@@ -1,0 +1,13 @@
+App\Context\OrderManagement\Domain\LineItem:
+  type: entity
+  table: om_line_item
+  id:
+    id:
+      type: LineItemId
+  embedded:
+    title:
+      class: App\Context\Shared\Domain\ValueObject\Title
+    price:
+      class: App\Context\Shared\Domain\ValueObject\Money
+    quantity:
+      class: App\Context\OrderManagement\Domain\Quantity

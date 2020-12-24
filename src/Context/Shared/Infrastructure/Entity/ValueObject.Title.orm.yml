@@ -1,0 +1,5 @@
+App\Context\Shared\Domain\ValueObject\Title:
+  type: embeddable
+  fields:
+    value:
+      type: string

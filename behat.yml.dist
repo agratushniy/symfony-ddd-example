@@ -1,0 +1,10 @@
+default:
+    extensions:
+        FriendsOfBehat\SymfonyExtension:
+            bootstrap: 'tests/bootstrap.php'
+            kernel:
+                class: 'App\Kernel'
+    suites:
+        order_management:
+            contexts:
+                - App\Tests\Behat\Context\Order

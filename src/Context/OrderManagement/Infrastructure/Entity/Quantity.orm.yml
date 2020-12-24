@@ -1,0 +1,5 @@
+App\Context\OrderManagement\Domain\Quantity:
+  type: embeddable
+  fields:
+    value:
+      type: integer
