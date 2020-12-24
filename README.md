@@ -1,6 +1,6 @@
 DDDevotion meetup 23/12/2020
 ============================
-Наш [канал на ютубчике ](https://www.youtube.com/channel/UCGiT8Psj7xt5gezKUL8faNA)
+Наш [канал на ютубчике ](https://www.youtube.com/dddevotion)
 
 Канал в телеге https://t.me/dddevotion 
 
