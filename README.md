@@ -1,7 +1,12 @@
 DDDevotion meetup 23/12/2020
 ============================
+Наш [канал на ютубчике ](https://www.youtube.com/channel/UCGiT8Psj7xt5gezKUL8faNA)
 
-https://dddevotion.timepad.ru/event/1509640/
+Канал в телеге https://t.me/dddevotion 
+
+Чатик в телеге https://t.me/iDDDqd
+
+Евент https://dddevotion.timepad.ru/event/1509640/
 
 Репозиторий с учебным проектом на Symfony, о котором рассказывал Андрей Ратушный.
 
