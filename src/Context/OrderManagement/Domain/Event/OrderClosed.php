@@ -7,6 +7,9 @@ namespace App\Context\OrderManagement\Domain\Event;
 use App\Context\OrderManagement\Domain\OrderId;
 use App\Context\Shared\Domain\Event;
 
+/**
+ * Заказ закрыт
+ */
 class OrderClosed extends Event
 {
     public function __construct(OrderId $orderId)

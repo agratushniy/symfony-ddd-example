@@ -1,0 +1,23 @@
+version: "3"
+services:
+
+  webserver:
+    image: ugraweb/symfony:nginx
+    container_name: ddd-learn-23-12-web
+    working_dir: /application
+    volumes:
+      - ../:/application
+      - /etc/localtime:/etc/localtime:ro
+    ports:
+      - "80:80"
+
+  php-fpm:
+    build:
+      context: ./volumes/php
+    container_name: ddd-learn-23-12-php
+    user: '1000:1000'
+    volumes:
+      - ../:/application
+      - /etc/localtime:/etc/localtime:ro
+      - ~/.ssh:/var/www/.ssh
+

@@ -7,8 +7,13 @@ namespace App\Context\Kitchen\Domain;
 use App\Context\Kitchen\Domain\Event\OrderCookedOnKitchen;
 use App\Context\Kitchen\Domain\Event\OrderCreatedOnKitchen;
 use App\Context\Shared\Domain\AggregateRoot;
+use App\DDDDocs\Annotation\BusinessRule;
+use App\DDDDocs\Annotation\Entity;
 use Doctrine\Common\Collections\Collection;
 
+/**
+ * @Entity(name="Заказ", description="Заказ на кухне, с которым работают повора. Повар берет заказ в работу и по очереди готовит все блюда в заказе.")
+ */
 class Order extends AggregateRoot
 {
     /**
@@ -17,6 +22,11 @@ class Order extends AggregateRoot
     private Collection $dishes;
     private bool $cooked;
 
+    /**
+     * Создать заказ
+     * @param OrderId $id
+     * @param Collection $dishes
+     */
     public function __construct(OrderId $id, Collection $dishes)
     {
         $this->id = $id;
@@ -51,20 +61,18 @@ class Order extends AggregateRoot
         }
 
         $foundDish->cookingComplete();
-
+        /**
+         * @BusinessRule(title="Приготовить заказ, если все блюда в заказе готовы",
+         *     description="Если в заказе все блюда пригтоовлены, то такой заказ можно считать полностью готовым.")
+         */
         if (!$this->hasUncookedDishes()) {
-            $this->orderCookingComplete();
-        }
-    }
+            if ($this->cooked) {
+                return;
+            }
 
-    protected function orderCookingComplete(): void
-    {
-        if ($this->cooked) {
-            return;
+            $this->cooked = true;
+            $this->record(new OrderCookedOnKitchen($this->id()->value()));
         }
-
-        $this->cooked = true;
-        $this->record(new OrderCookedOnKitchen($this->id()->value()));
     }
 
     protected function hasUncookedDishes(): bool

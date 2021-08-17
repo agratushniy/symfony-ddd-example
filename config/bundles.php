@@ -8,4 +8,5 @@ return [
                                                                                            'test' => true
     ],
     FriendsOfBehat\SymfonyExtension\Bundle\FriendsOfBehatSymfonyExtensionBundle::class => ['test' => true],
+    Symfony\Bundle\TwigBundle\TwigBundle::class                                        => ['all' => true],
 ];

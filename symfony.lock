@@ -132,6 +132,15 @@
     "myclabs/deep-copy": {
         "version": "1.10.2"
     },
+    "nette/finder": {
+        "version": "v2.5.2"
+    },
+    "nette/robot-loader": {
+        "version": "v3.4.0"
+    },
+    "nette/utils": {
+        "version": "v3.2.2"
+    },
     "nikic/php-parser": {
         "version": "v4.10.4"
     },
@@ -421,6 +430,23 @@
     "symfony/translation-contracts": {
         "version": "v2.3.0"
     },
+    "symfony/twig-bridge": {
+        "version": "v5.2.12"
+    },
+    "symfony/twig-bundle": {
+        "version": "5.0",
+        "recipe": {
+            "repo": "github.com/symfony/recipes",
+            "branch": "master",
+            "version": "5.0",
+            "ref": "1766a292f47e3bf94bcfc192c2aa090588f9f46d"
+        },
+        "files": [
+            "config/packages/test/twig.yaml",
+            "config/packages/twig.yaml",
+            "templates/base.html.twig"
+        ]
+    },
     "symfony/var-dumper": {
         "version": "v5.2.1"
     },
@@ -432,6 +458,9 @@
     },
     "theseer/tokenizer": {
         "version": "1.2.0"
+    },
+    "twig/twig": {
+        "version": "v3.3.2"
     },
     "webimpress/safe-writer": {
         "version": "2.1.0"

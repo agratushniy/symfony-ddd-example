@@ -1,3 +1,8 @@
+###> sphinx ###
+/public/dddocs
+/resources/sphinx/source/context
+/resources/sphinx/source/index.rst
+###< sphinx ###
 
 ###> symfony/framework-bundle ###
 /.env.local

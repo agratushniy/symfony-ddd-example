@@ -7,8 +7,15 @@ namespace App\Context\OrderManagement\Application\Command;
 use App\Context\OrderManagement\Domain\OrderId;
 use App\Context\Shared\Application\Bus\Command\ICommand;
 
+/**
+ * Отправить заказ на кухню
+ */
 class SendOrderToKitchen implements ICommand
 {
+    /**
+     * Идентификатор заказа
+     * @var OrderId
+     */
     private OrderId $orderId;
 
     public function __construct(string $orderId)

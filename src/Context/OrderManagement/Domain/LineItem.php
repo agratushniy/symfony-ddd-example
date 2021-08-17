@@ -7,9 +7,10 @@ namespace App\Context\OrderManagement\Domain;
 use App\Context\Shared\Domain\DefaultEntity;
 use App\Context\Shared\Domain\ValueObject\Money;
 use App\Context\Shared\Domain\ValueObject\Title;
+use App\DDDDocs\Annotation\Entity;
 
 /**
- * Элемент заказа
+ * @Entity(name="Элемент заказа", description="Товар, который входит в состав заказа")
  */
 class LineItem extends DefaultEntity
 {

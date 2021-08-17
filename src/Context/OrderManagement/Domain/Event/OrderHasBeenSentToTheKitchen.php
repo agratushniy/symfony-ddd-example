@@ -6,6 +6,9 @@ namespace App\Context\OrderManagement\Domain\Event;
 
 use App\Context\Shared\Domain\Event;
 
+/**
+ * Заказ был отправлен на кухню
+ */
 class OrderHasBeenSentToTheKitchen extends Event
 {
     private string $orderId;

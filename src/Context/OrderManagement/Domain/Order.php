@@ -7,9 +7,13 @@ namespace App\Context\OrderManagement\Domain;
 use App\Context\OrderManagement\Domain\Event\OrderClosed;
 use App\Context\OrderManagement\Domain\Event\OrderHasBeenSentToTheKitchen;
 use App\Context\Shared\Domain\AggregateRoot;
+use App\DDDDocs\Annotation\AggregateNode;
+use App\DDDDocs\Annotation\BusinessRule;
+use App\DDDDocs\Annotation\Entity;
 use Doctrine\Common\Collections\Collection;
 
 /**
+ * @Entity(name="Заказ", description="Заказ формируется оператором и в конечном итоге должен быть доставлен клиенту.")
  * @method OrderId id()
  */
 class Order extends AggregateRoot
@@ -18,7 +22,10 @@ class Order extends AggregateRoot
     private const STATUS_ON_KITCHEN = 'onKitchen';
     private const STATUS_COOKED = 'cooked';
     private const STATUS_CLOSED = 'closed';
-
+    /**
+     * @AggregateNode(class="App\Context\OrderManagement\Domain\LineItem")
+     * @var Collection
+     */
     private Collection $items;
     private string $status;
 
@@ -47,6 +54,10 @@ class Order extends AggregateRoot
      */
     public function sendToKitchen(): void
     {
+        /**
+         * @BusinessRule(title="На кухню можно отправлять только новые заказы",
+         * description="Можно начать готовить только новый заказ. Заказы, которые уже находятся в работе, нельзя вернуть на кухню")
+         */
         if ($this->status !== self::STATUS_NEW) {
             //exception
         }

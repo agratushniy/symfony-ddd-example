@@ -6,6 +6,7 @@ namespace App\Context\OrderManagement\Application\Command\Handler;
 
 use App\Context\OrderManagement\Application\Command\SendOrderToKitchen;
 use App\Context\OrderManagement\Domain\IOrderRepository;
+use App\Context\OrderManagement\Domain\Order;
 use App\Context\Shared\Application\Bus\Command\ICommandHandler;
 use App\Context\Shared\Domain\Error\DatabaseError;
 
@@ -27,6 +28,9 @@ class SentOrderToKitchenHandler implements ICommandHandler
      */
     public function __invoke(SendOrderToKitchen $command)
     {
+        /**
+         * @var Order $order
+         */
         if ($order = $this->orderRepository->findOneById($command->orderId())) {
             //exception
         }

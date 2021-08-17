@@ -1,9 +1,21 @@
 parameters:
+  dddocs.contexts_list:
+    - OrderManagement
+    - Warehouse
+    - Kitchen
+
+  dddocs.contexts_path: '%kernel.project_dir%/src/Context'
+  sphinx.contexts_path: '%kernel.project_dir%/resources/sphinx/source/context'
+  sphinx.index_path: '%kernel.project_dir%/resources/sphinx/source/index.rst'
+  class_loader.tmp_path: '%kernel.project_dir%/var/class_loader_tmp'
 
 services:
   _defaults:
     autowire: true
     autoconfigure: true
+    bind:
+      $annotationReader: '@doctrine.annotation.reader'
+      $contextsPath: '%dddocs.contexts_path%'
 
   _instanceof:
     # Обработчики команд для шины
@@ -32,3 +44,49 @@ services:
   App\Context\Shared\Infrastructure\DomainEventsPlayer:
     tags:
       - { name: 'doctrine.event_subscriber' }
+
+  ###> DDDDocs ###
+
+  robot.loader:
+    class: 'Nette\Loaders\RobotLoader'
+
+  doctrine.annotation.reader:
+    class: 'Doctrine\Common\Annotations\AnnotationReader'
+
+  App\Command\ClearClassLoaderCache:
+    arguments:
+      $cachePath: '%class_loader.tmp_path%'
+
+  App\Command\ClearSphinxSources:
+    arguments:
+      $contextFilesPath: '%sphinx.contexts_path%'
+      $indexFilePath: '%sphinx.index_path%'
+
+  App\DDDDocs\ClassLoader:
+    arguments:
+      $robotLoader: '@robot.loader'
+      $tmpDirectory: '%class_loader.tmp_path%'
+
+  App\Command\GenerateDocs:
+    arguments:
+      $contextsList: '%dddocs.contexts_list%'
+      $classGrabbers:
+        - '@App\DDDDocs\Grabber\EntityGrabber'
+        - '@App\DDDDocs\Grabber\UseCaseGrabber'
+
+  App\DDDDocs\Grabber\EntityGrabber:
+    arguments:
+      $childGrabbers:
+        - '@App\DDDDocs\Grabber\MutatorsGrabber'
+        - '@App\DDDDocs\Grabber\BusinessRuleGrabber'
+        - '@App\DDDDocs\Grabber\EventsGrabber'
+        - '@App\DDDDocs\Grabber\EventSubscriberGrabber'
+        - '@App\DDDDocs\Grabber\AggregateNodeGrabber'
+
+  App\DDDDocs\Grabber\UseCaseGrabber:
+    arguments:
+      $childGrabbers:
+        - '@App\DDDDocs\Grabber\UseCaseEntitiesGrabber'
+
+
+###< DDDDocs ###
